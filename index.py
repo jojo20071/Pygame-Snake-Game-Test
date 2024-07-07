@@ -69,3 +69,41 @@ def game_loop():
 
     foodx = round(random.randrange(0, screen_width - snake_block) / 10.0) * 10.0
     foody = round(random.randrange(0, screen_height - snake_block) / 10.0) * 10.0
+    while not game_over:
+        while game_close == True:
+            screen.fill(black)
+            message("You Lost! Press Q-Quit or C-Play Again", red)
+            your_score(length_of_snake - 1)
+            pygame.display.update()
+            pygame.mixer.Sound.play(game_over_sound_effect)
+
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_q:
+                        game_over = True
+                        game_close = False
+                    if event.key == pygame.K_c:
+                        game_loop()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_over = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    x1_change = -snake_block
+                    y1_change = 0
+                elif event.key == pygame.K_RIGHT:
+                    x1_change = snake_block
+                    y1_change = 0
+                elif event.key == pygame.K_UP:
+                    y1_change = -snake_block
+                    x1_change = 0
+                elif event.key == pygame.K_DOWN:
+                    y1_change = snake_block
+                    x1_change = 0
+
+        if x1 >= screen_width or x1 < 0 or y1 >= screen_height or y1 < 0:
+            game_close = True
+        x1 += x1_change
+        y1 += y1_change
+        screen.fill(black)
