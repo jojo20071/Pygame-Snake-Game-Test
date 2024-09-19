@@ -16,7 +16,7 @@ green = (0, 255, 0)
 red = (255, 0, 0)
 
 snake_block = 10
-snake_speed = 15
+snake_speed = 50
 
 font_style = pygame.font.SysFont(None, 50)
 score_font = pygame.font.SysFont(None, 35)
